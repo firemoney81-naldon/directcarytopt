@@ -1,23 +1,672 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
+
+  <style>
+        /* CSS for modern and soft design */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f7f9fc;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 5px solid #e74c3c;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.1em;
+            color: #bdc3c7;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.95em;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: #e74c3c;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+        }
+
+        section {
+            padding: 30px 20px;
+            margin-bottom: 25px;
+            border-bottom: 1px dashed #ddd;
+        }
+
+        section:last-child {
+            border-bottom: none;
+        }
+
+        h2 {
+            font-size: 2em;
+            color: #2c3e50;
+            margin-top: 0;
+            border-bottom: 2px solid #e74c3c;
+            padding-bottom: 10px;
+            font-weight: 600;
+        }
+
+        h3 {
+            font-size: 1.5em;
+            color: #34495e;
+            margin-top: 20px;
+        }
+
+        p {
+            font-size: 1em;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        /* Form styling */
+        form {
+            background-color: #ecf0f1;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #34495e;
+        }
+
+        input[type="text"], input[type="number"], input[type="tel"], input[type="date"], input[type="email"], select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus, input[type="number"]:focus, input[type="tel"]:focus, input[type="email"]:focus, select:focus {
+            border-color: #e74c3c;
+            outline: none;
+        }
+
+        .submit-button {
+            background-color: #e74c3c;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background-color: #c0392b;
+        }
+
+        /* Table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 0.95em;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            color: #333;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        /* Definition list (FAQ/details) styling */
+        dl dt {
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1em;
+            padding: 15px;
+            background-color: #f2f2f2;
+            border-left: 5px solid #e74c3c;
+            margin-bottom: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        dl dt:hover {
+            background-color: #e8e8e8;
+        }
+
+        dl dt.active {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        dl dd {
+            padding: 15px;
+            margin-left: 0;
+            background-color: #fafafa;
+            border: 1px solid #eee;
+            margin-bottom: 15px;
+            display: none; /* Initial state */
+        }
+        
+        dl dt.active + dd {
+            display: block; /* Show content when active */
+        }
+
+        /* Call to Action button styling */
+        .cta-button {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+            text-align: center;
+        }
+
+        .cta-button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Keyword tags styling */
+        .keyword-tags {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .keyword-tags a {
+            background-color: #ddd;
+            color: #555;
+            padding: 5px 10px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-size: 0.85em;
+            transition: background-color 0.3s ease;
+        }
+
+        .keyword-tags a:hover {
+            background-color: #ccc;
+            color: #333;
+        }
+
+        /* Image styling */
+        .image-container {
+            margin-top: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Trust links styling */
+        .trust-links {
+            margin-top: 30px;
+            background-color: #f0f4f7;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .trust-links ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 10px;
+        }
+
+        .trust-links li {
+            margin-bottom: 8px;
+        }
+
+        .trust-links li a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .trust-links li a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive design adjustments */
+        @media (max-width: 768px) {
+            header { padding: 30px 15px; }
+            header h1 { font-size: 2em; }
+            main { padding: 15px; margin: 10px auto; }
+            h2 { font-size: 1.8em; }
+            h3 { font-size: 1.3em; }
+            nav ul li { margin: 0 8px; }
+        }
+
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://yourdomain.com/ev6-maintenance-cost"
+      },
+      "headline": "2026년 기아 EV6 유지비 상세 분석 및 비용 절감 가이드",
+      "image": "https://yourdomain.com/ev6-charging-image.jpg",
+      "datePublished": "2026-01-01T00:00:00+09:00",
+      "dateModified": "2026-01-01T00:00:00+09:00",
+      "author": {
+        "@type": "Person",
+        "name": "EV6 Cost Analyst Team"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "EV Cost Review Center",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://yourdomain.com/logo.png"
+        }
+      },
+      "description": "2026년 기준 기아 EV6의 예상 유지비(전기차 충전 비용, 보험료, 세금)를 상세 분석합니다. EV6 오너들의 내돈내산 후기를 바탕으로 현실적인 유지 비용과 효율적인 절약 방법을 제시합니다.",
+      "articleBody": "전기차 구매를 고려하는 운전자들에게 가장 중요한 정보 중 하나는 '유지비'입니다. 기아 EV6는 국내외에서 많은 사랑을 받고 있는 모델로, 2026년에도 꾸준히 인기를 이어갈 것으로 예상됩니다. 이 문서는 2026년 기준으로 EV6의 충전 비용, 보험료, 세금 등 필수 유지비를 상세하게 분석하고, 오너들의 실제 후기를 바탕으로 현실적인 비용 절감 팁을 제공합니다. 특히 내연기관차와 비교하여 EV6가 가지는 장점과 단점, 그리고 2026년 전기차 지원 정책 변화에 따른 예상 비용 변화를 심층적으로 다룹니다."
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>2026년 기아 EV6 유지비 상세 분석: 내돈내산 오너들의 현실적인 비용 가이드</h1>
+        <p>기아 EV6 구매 전 필수 확인! 2026년 기준 예상 충전 비용, 보험료, 세금 완벽 분석. 합리적인 전기차 라이프를 시작하세요.</p>
+        <nav aria-label="메인 내비게이션">
+            <ul>
+                <li><a href="#cost-overview">유지비 개요</a></li>
+                <li><a href="#charging-cost">충전 비용 분석</a></li>
+                <li><a href="#insurance-tax">보험 및 세금</a></li>
+                <li><a href="#comparative-analysis">경쟁 모델 비교</a></li>
+                <li><a href="#faq">자주 묻는 질문</a></li>
+                <li><a href="#estimation-form">유지비 견적 요청</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <main>
-      <h1>Home page</h1>
+        
+        <section id="estimation-form">
+            <h2>✨ 1분 EV6 유지비 예상 견적 요청</h2>
+            <p><strong>기아 EV6</strong> 구매 전, 나의 운전 습관에 따른 정확한 <strong>유지비</strong>를 예측해보세요. 주행 환경과 보험 가입 조건만 입력하면 <strong>EV6 오너</strong>들의 평균 데이터를 기반으로 <strong>합리적인 예상 비용</strong>을 산출해 드립니다. <strong>EV6 내돈내산 후기</strong>를 참고하여 현실적인 견적을 받아보세요.</p>
+            
+            <form action="submit-quotation.php" method="POST" aria-label="유지비 예상 견적 폼">
+                <div class="form-group">
+                    <label for="car_model">EV6 모델 선택</label>
+                    <select id="car_model" name="car_model" required>
+                        <option value="">모델 선택</option>
+                        <option value="EV6 Standard Long Range 2WD">EV6 스탠다드 롱레인지 2WD</option>
+                        <option value="EV6 Standard Long Range 4WD">EV6 스탠다드 롱레인지 4WD</option>
+                        <option value="EV6 GT-Line">EV6 GT-Line</option>
+                        <option value="EV6 GT">EV6 GT</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="driving_distance">월 평균 주행 거리 (km)</label>
+                    <input type="number" id="driving_distance" name="driving_distance" placeholder="예: 1,000" required>
+                </div>
+                <div class="form-group">
+                    <label for="charging_type">주요 충전 환경</label>
+                    <select id="charging_type" name="charging_type" required>
+                        <option value="">선택</option>
+                        <option value="집밥(아파트/주택 전용 충전기)">집밥(아파트/주택 전용 충전기)</option>
+                        <option value="회사 충전기">회사 충전기</option>
+                        <option value="고속도로/공용 급속 충전">고속도로/공용 급속 충전</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="insurance_history">보험 가입 경력 (년)</label>
+                    <input type="number" id="insurance_history" name="insurance_history" placeholder="예: 5" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">연락처</label>
+                    <input type="tel" id="phone" name="phone" placeholder="010-XXXX-XXXX" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required>
+                </div>
+                <button type="submit" class="submit-button">EV6 예상 유지비 견적 요청</button>
+            </form>
+        </section>
+        
+        <section id="cost-overview">
+            <h2>🏠 기아 EV6 유지비 개요: 내연기관차와 차이점 분석</h2>
+            <p><strong>기아 EV6 유지비</strong>는 내연기관차와 비교했을 때 근본적인 차이점을 보입니다. 내연기관차의 주유비 대신 **충전 비용**이 발생하며, 엔진 오일 교환이나 변속기 오일 교환 같은 소모품 교체 항목이 대폭 줄어듭니다. 2026년 기준으로 <strong>EV6 유지 비용</strong>의 핵심은 **전기 요금**, **자동차 보험료**, 그리고 **자동차세**로 압축됩니다. 특히 <strong>전기차 유지비</strong>의 <strong>장점</strong>은 유류비 절감이지만, 단점으로는 높은 초기 구매 가격과 배터리 관리, 그리고 <strong>타이어 마모</strong>가 빠른 점을 꼽을 수 있습니다.</p>
+            
+            <h3>EV6 유지비 구성 요소 비교 (EV6 vs. 내연기관)</h3>
+            <p>EV6와 동급 내연기관차(예: 쏘렌토 하이브리드)의 주요 유지비 항목을 비교하여 <strong>차이점</strong>을 명확히 파악해보세요. 전기차는 소모품 교체 주기가 길어지므로 <strong>장기적인 비용 절감</strong> 효과가 뚜렷합니다.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>구분</th>
+                        <th>기아 EV6 (전기차)</th>
+                        <th>내연기관차 (가솔린/디젤)</th>
+                        <th>비고</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>주요 에너지 비용</strong></td>
+                        <td>전기 충전 비용 (kW당 요금)</td>
+                        <td>유류 비용 (L당 가격)</td>
+                        <td>EV6의 충전 비용이 훨씬 저렴</td>
+                    </tr>
+                    <tr>
+                        <td><strong>엔진/변속기 오일</strong></td>
+                        <td>해당 없음</td>
+                        <td>정기적인 교환 필수 (평균 1만km)</td>
+                        <td>EV6의 가장 큰 <strong>장점</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>소모품 교환</strong></td>
+                        <td>브레이크 패드, 타이어, 에어컨 필터 등</td>
+                        <td>엔진오일, 미션오일, 점화플러그, 브레이크 등</td>
+                        <td>EV6가 소모품 항목이 적음</td>
+                    </tr>
+                    <tr>
+                        <td><strong>정기 점검</strong></td>
+                        <td>배터리 상태 점검, 소프트웨어 업데이트</td>
+                        <td>엔진 상태 점검, 배기가스 점검</td>
+                        <td>EV6는 고전압 배터리 관리 중요</td>
+                    </tr>
+                    <tr>
+                        <td><strong>자동차세</strong></td>
+                        <td>13만원 고정 (2026년 기준)</td>
+                        <td>배기량에 따라 산정 (고가)</td>
+                        <td>EV6의 큰 <strong>혜택</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>EV6 오너들이 말하는 현실적인 유지비 <strong>장점과 단점</strong></h3>
+            <ul>
+                <li><strong>장점 (충전 비용):</strong> 공용 충전소 할인이나 '집밥' 설치 시, 주행 1km당 <strong>평균</strong> 비용이 내연기관차 대비 1/5 수준으로 저렴합니다. <strong>내돈내산</strong> 오너들의 <strong>후기</strong>에 따르면 월 10만 원 미만으로 충분히 주행 가능합니다.</li>
+                <li><strong>장점 (정비 비용):</strong> 엔진이 없어 정기적인 오일 교체가 필요 없습니다. 정비소 방문 횟수도 줄어들어 <strong>시간 절약</strong> 효과도 큽니다.</li>
+                <li><strong>단점 (타이어 마모):</strong> EV6는 차체 무게가 무겁고 토크가 높아 타이어 마모 속도가 내연기관차보다 빠릅니다. <strong>타이어 교체 비용</strong>(평균 20만원대)이 잦아질 수 있으므로, <strong>유지비</strong>를 계산할 때 고려해야 합니다.</li>
+                <li><strong>단점 (초기 비용):</strong> 차량 가격 자체는 동급 내연기관차보다 <strong>가격</strong>이 높아 초기 부담이 큽니다. 정부의 <strong>보조금</strong> 정책 변화에 따라 체감 <strong>가격</strong>이 달라집니다.</li>
+            </ul>
+        </section>
+        
+        <section id="charging-cost">
+            <h2>💰 2026년 EV6 충전 비용 상세 분석: '집밥' vs. 공용 충전소</h2>
+            <p><strong>기아 EV6 유지비</strong>에서 가장 큰 비중을 차지하는 것은 **충전 비용**입니다. 2026년에는 전기차 보급 확대로 인해 충전 요금 체계가 변동될 가능성이 높습니다. <strong>EV6 오너</strong>의 주행 환경에 따라 충전 비용이 크게 달라지므로, 자신의 충전 습관을 파악하는 것이 중요합니다. **충전 비용**을 절약하는 가장 효율적인 방법은 <strong>'집밥'</strong>(아파트/주택 전용 충전기)을 이용하는 것입니다. <strong>EV6 롱레인지</strong> 모델 기준으로 1회 충전에 필요한 <strong>평균</strong> 비용을 산출해봅니다.</p>
+            
+            <h3>주행거리와 충전 비용 계산 가이드</h3>
+            <p>EV6 롱레인지 2WD 모델의 1회 충전 시 주행 가능 거리는 약 475km(EPA 기준)입니다. 배터리 용량은 77.4kWh입니다. 충전 효율을 고려하여 1회 완충 시 약 80kWh의 전력이 필요하다고 가정할 때, 충전 방식에 따른 <strong>예상 비용</strong>은 다음과 같습니다.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>충전 방식</th>
+                        <th>평균 요금 (kWh당)</th>
+                        <th>1회 완충 예상 비용</th>
+                        <th>1km당 비용 (475km 주행 기준)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>집밥 (아파트 충전기)</strong></td>
+                        <td>약 100~150원 (심야 요금 적용)</td>
+                        <td>8,000원 ~ 12,000원</td>
+                        <td>약 20원 ~ 25원</td>
+                    </tr>
+                    <tr>
+                        <td><strong>공용 급속 충전소</strong></td>
+                        <td>약 300~350원 (할인 적용 시)</td>
+                        <td>24,000원 ~ 28,000원</td>
+                        <td>약 50원 ~ 60원</td>
+                    </tr>
+                    <tr>
+                        <td><strong>초급속 충전소 (E-pit 등)</strong></td>
+                        <td>약 350~450원 (피크 시간대)</td>
+                        <td>28,000원 ~ 36,000원</td>
+                        <td>약 60원 ~ 75원</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><em>*2026년 기준 전기 요금 변동 가능성이 높으므로, 이는 2025년 평균 요금을 기준으로 산정된 <strong>예상 비용</strong>입니다.</em></p>
+            
+            <h3>충전 비용 절감 팁: <strong>할인 혜택</strong> 및 충전 카드 활용</h3>
+            <dl>
+                <dt tabindex="0" aria-expanded="false">Q1. 전기차 충전 요금 <strong>할인 혜택</strong>을 최대로 받는 방법은?</dt>
+                <dd>A. 2026년에는 전기차 충전 카드별 <strong>할인</strong> 및 <strong>캐시백</strong> 혜택이 중요합니다. 신용카드 회사들은 전기차 충전 전용 카드를 출시하고 있으며, 이를 활용하면 공용 충전소 이용 시 <strong>충전 비용</strong>을 10~20% 절감할 수 있습니다. <strong>신규 가입</strong> 프로모션이나 <strong>이벤트</strong>를 통해 <strong>현금지원</strong>이나 <strong>상품권</strong> 혜택을 제공받는 것도 좋은 방법입니다. <strong>네이버페이</strong>나 <strong>카카오페이</strong>와 연동된 충전 서비스도 고려해볼 만합니다.</dd>
+                
+                <dt tabindex="0" aria-expanded="false">Q2. <strong>배터리 수명</strong> 연장을 위한 충전 관리법은?</dt>
+                <dd>A. <strong>EV6</strong>의 배터리 수명을 최대로 유지하기 위해서는 완충(100%) 및 완전 방전(0%)을 피하는 것이 좋습니다. 일반적으로 20%~80% 사이를 유지하는 것이 <strong>장기적인 배터리 건강</strong>에 좋습니다. 초급속 충전소를 너무 자주 이용하는 것보다는, 완속 충전을 병행하여 배터리에 가해지는 부하를 줄이는 것이 <strong>유지 비용 절감</strong>과 <strong>장기적인 차량 가치</strong> 보존에 도움을 줍니다.</dd>
+            </dl>
+        </section>
+        
+        <section id="insurance-tax">
+            <h2>🛡️ EV6 보험료 및 자동차세: 2026년 <strong>혜택</strong>과 <strong>단점</strong></h2>
+            <p><strong>기아 EV6 유지비</strong>에서 충전 비용 다음으로 중요한 것은 **자동차 보험료**입니다. 전기차는 내연기관차보다 차량 가격이 높기 때문에 자차 보험료가 비싸다는 <strong>단점</strong>이 있습니다. 하지만 **자동차세** 측면에서는 엄청난 <strong>혜택</strong>을 누릴 수 있습니다. 2026년 예상되는 보험료 계산법과 세제 혜택을 상세히 알아봅니다.</p>
+
+            <h3>1. EV6 자동차 보험료 상세 분석</h3>
+            <dl>
+                <dt tabindex="0" aria-expanded="false">EV6 보험료가 내연기관차보다 비싼 이유</dt>
+                <dd><strong>EV6</strong>를 포함한 대부분의 전기차는 배터리 가격이 높고, 차체 구조가 복잡하여 사고 발생 시 <strong>수리 비용</strong>이 높습니다. 이 때문에 보험사들은 전기차 보험료를 높게 책정하는 경향이 있습니다. 특히 <strong>자차 보험료</strong> 비중이 내연기관차보다 높습니다. <strong>EV6</strong> 구매를 고려한다면 <strong>견적</strong> 시 반드시 자차 보험료를 꼼꼼하게 확인해야 합니다.</dd>
+                
+                <dt tabindex="0" aria-expanded="false">보험료 절감을 위한 <strong>비교</strong> 가이드</dt>
+                <dd>보험료를 <strong>저렴하게</strong> 책정하기 위해서는 여러 보험사의 <strong>보험료 비교</strong>가 필수입니다. <strong>다이렉트 보험</strong>을 통해 <strong>견적</strong>을 받아보는 것이 좋습니다. 운전자 한정 특약, 주행거리 특약(마일리지 할인), 안전 운전 할인(T맵 등 연동) 등 다양한 <strong>할인 혜택</strong>을 활용하면 <strong>예상 비용</strong>을 크게 줄일 수 있습니다. 특히 <strong>EV6</strong>는 첨단 안전장치(ADAS)를 기본 탑재하고 있어 관련 <strong>할인</strong>이 적용될 수 있습니다. <strong>신규 가입</strong>자는 다양한 프로모션을 확인해 보세요.</dd>
+            </dl>
+            
+            <h3>2. EV6 자동차세 및 기타 세금 혜택 (2026년 기준)</h3>
+            <p><strong>EV6</strong>는 내연기관차와 달리 배기량이 없으므로, **자동차세**가 정액으로 부과됩니다. 2026년 기준 전기차는 <strong>13만 원</strong>(교육세 포함)의 고정 세금이 적용됩니다. 이는 동급 내연기관차(예: 2,000cc SUV)의 연간 세금(약 50만 원)에 비해 현저히 낮은 수준입니다. 이 외에도 <strong>취득세 감면 혜택</strong>이 2026년까지 유지될 것으로 예상되어, <strong>EV6 구매</strong> 시 초기 <strong>비용</strong> 절감에 큰 도움이 됩니다.</p>
+        </section>
+
+        <section id="comparative-analysis">
+            <h2>📊 EV6 유지비 vs. 경쟁 모델 비교: 아이오닉 5, 테슬라 모델 3</h2>
+            <p><strong>기아 EV6 유지비</strong>를 정확히 파악하기 위해서는 경쟁 모델과의 비교가 필수적입니다. EV6의 주요 경쟁 모델은 현대 아이오닉 5와 테슬라 모델 3입니다. 각 모델별 <strong>장단점</strong>과 <strong>유지 비용 차이점</strong>을 비교하여, 어떤 차량이 나에게 더 적합할지 판단해 보세요.</p>
+
+            <h3>모델별 충전 효율성 및 정비 비용 <strong>차이점</strong></h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>구분</th>
+                        <th>기아 EV6</th>
+                        <th>현대 아이오닉 5</th>
+                        <th>테슬라 모델 3</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>충전 속도 (800V 초급속)</strong></td>
+                        <td>매우 빠름 (18분)</td>
+                        <td>매우 빠름 (18분)</td>
+                        <td>빠름 (슈퍼차저 이용 시)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>1회 충전 주행 가능 거리</strong></td>
+                        <td>우수 (롱레인지 2WD 475km)</td>
+                        <td>우수 (롱레인지 2WD 458km)</td>
+                        <td>최상 (롱레인지 602km)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>정비 편의성</strong></td>
+                        <td>기아 오토큐 (접근성 우수)</td>
+                        <td>현대 블루핸즈 (접근성 우수)</td>
+                        <td>테슬라 서비스 센터 (지점 수 적음)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>일반 부품 비용 (평균)</strong></td>
+                        <td>국산차 평균 수준</td>
+                        <td>국산차 평균 수준</td>
+                        <td>수입차 평균 수준 (부품 수급 용이성 낮음)</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><strong>EV6</strong>는 <strong>아이오닉 5</strong>와 E-GMP 플랫폼을 공유하여 <strong>유지비</strong> 측면에서 큰 <strong>차이점</strong>이 없으나, <strong>테슬라 모델 3</strong>에 비해 정비 접근성이 매우 우수합니다. <strong>테슬라</strong>는 주행 가능 거리가 길다는 <strong>장점</strong>이 있지만, <strong>수리 비용</strong>이나 <strong>정비 시간</strong>이 더 소요될 수 있다는 <strong>단점</strong>이 있습니다.</p>
+
+            <h3>EV6 오너 커뮤니티 <strong>후기</strong> 분석: <strong>네이버 카페</strong>, <strong>유튜브</strong>, <strong>디시인사이드</strong></h3>
+            <p>실제 <strong>EV6</strong> <strong>내돈내산</strong> 오너들의 <strong>후기</strong>를 보면, <strong>유지비</strong> 만족도가 매우 높습니다. <strong>네이버 카페</strong>나 <strong>유튜브</strong> 채널에서 <strong>EV6 유지비</strong>를 검색해 보면 <strong>충전 비용</strong> 절감 효과에 대한 긍정적인 평가가 많습니다. 특히 <strong>디시인사이드</strong>와 같은 커뮤니티에서는 <strong>EV6</strong>의 <strong>장단점</strong>에 대한 솔직한 의견 교환이 활발합니다. <strong>EV6</strong>의 <strong>장점</strong>은 정숙성과 <strong>뛰어난 주행 성능</strong>, <strong>단점</strong>은 <strong>소음 방지 대책</strong>이 일부 부족한 부분으로 꼽힙니다.</p>
+            <div class="image-container">
+                <!-- Pexels Image for EV6/Electric Car -->
+                <!-- Example: https://www.pexels.com/search/electric%20car%20charging/ -->
+                <img src="https://images.pexels.com/photos/1108201/pexels-photo-1108201.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="EV6 충전 모습">
+                <p style="text-align: center; font-size: 0.8em; color: #777;">[이미지: 전기차 충전 장면. 기아 EV6는 Pexels에서 직접적인 이미지를 찾기 어려울 경우, '전기차 충전' 이미지 사용]</p>
+            </div>
+        </section>
+        
+        <section id="information-text">
+            <h2>📜 심층 정보: 2026년 EV6 유지비 절감을 위한 전문가 가이드</h2>
+            
+            <p><strong>기아 EV6 유지비</strong>는 구매 전 철저한 분석을 통해 최적화할 수 있습니다. 2026년 전기차 시장은 <strong>AI 기술</strong>과 배터리 기술의 발전으로 더욱 빠르게 변화할 것입니다. <strong>EV6 오너</strong>가 되기 전에 알아야 할 심층적인 정보들을 통해 <strong>유지 비용</strong>을 최소화하세요.</p>
+
+            <h3>1. 2026년 전기차 보조금 및 <strong>혜택</strong> 변화 <strong>예상</strong></h3>
+            <p>2026년에는 전기차 보조금이 단계적으로 축소될 <strong>예상</strong>입니다. 초기 구매 <strong>가격</strong> 부담을 줄이는 **보조금 혜택**은 <strong>EV6</strong> <strong>유지비</strong>의 실질적인 시작점을 결정합니다. 보조금 외에도 <strong>취득세 감면</strong>(최대 140만원), 고속도로 통행료 할인(50%), 공영 주차장 주차료 할인(50%~100%) 등 다양한 <strong>혜택</strong>이 <strong>EV6</strong> 오너에게 주어집니다. <strong>정부24</strong>나 <strong>환경부</strong> 사이트를 통해 <strong>보조금</strong> <strong>신규</strong> 정책을 확인해야 합니다. <strong>EV6</strong> <strong>가입</strong> 시 이러한 <strong>혜택</strong>들을 꼼꼼히 챙겨야 합니다.</p>
+            
+            <h3>2. 타이어 관리: EV6 <strong>유지비</strong>의 숨겨진 <strong>단점</strong></h3>
+            <p><strong>EV6</strong>의 <strong>유지비</strong>에서 가장 간과하기 쉬운 항목은 타이어입니다. 전기차는 배터리 무게로 인해 내연기관차보다 200~300kg 더 무겁습니다. 또한 순간 토크가 높아 타이어 마모 속도가 빠릅니다. **EV6 타이어 교체 주기**는 오너의 운전 습관에 따라 다르지만, <strong>평균</strong> 3~4만km마다 교체가 필요하며, <strong>가격</strong>은 일반 타이어보다 비싼 전기차 전용 타이어(OE 타이어)를 권장합니다. <strong>내돈내산</strong> <strong>후기</strong>에 따르면, **EV6 GT** 모델의 경우 고성능 타이어를 사용하므로 <strong>비용</strong>이 더 높습니다. <strong>EV6</strong> <strong>타이어</strong> <strong>할인</strong> <strong>이벤트</strong>를 활용하거나, <strong>타이어 전문 업체</strong>를 통해 구매하는 것이 <strong>저렴한곳</strong>을 찾는 방법입니다.</p>
+            
+            <h3>3. 배터리 관리: <strong>장기적인 EV6 유지비</strong>의 핵심</h3>
+            <p><strong>EV6</strong>의 핵심 부품인 고전압 배터리는 <strong>유지비</strong>에 가장 큰 영향을 미칩니다. <strong>기아</strong>는 10년/20만km의 배터리 보증 기간을 제공하므로, 보증 기간 내에는 큰 걱정 없이 운행할 수 있습니다. 하지만 보증 기간이 끝난 후 배터리 교체가 필요하다면 <strong>견적</strong> <strong>금액</strong>은 수천만 원에 달할 수 있습니다. <strong>배터리 수명</strong> 연장을 위한 팁은 다음과 같습니다:</p>
+            <ul>
+                <li><strong>과도한 급속 충전 지양:</strong> 급속 충전은 배터리에 스트레스를 주므로, 완속 충전을 주로 사용합니다.</li>
+                <li><strong>주차 시 온도 관리:</strong> 극심한 더위나 추위는 배터리 성능 저하의 원인이 됩니다.</li>
+                <li><strong>정기적인 소프트웨어 업데이트:</strong> 차량의 BMS(배터리 관리 시스템)는 소프트웨어 업데이트를 통해 최적화됩니다.</li>
+            </ul>
+
+            <h3>4. <strong>AI</strong> 시대의 <strong>EV6 유지비</strong> 관리: 미래 기술 활용</h3>
+            <p>2026년 이후에는 <strong>AI 에이전트</strong> 기반의 차량 관리 시스템이 보편화될 것입니다. <strong>EV6</strong>는 OTA(Over The Air) 업데이트 기능을 지원하며, 이를 통해 <strong>AI</strong>가 차량 상태를 실시간으로 모니터링하여 최적의 <strong>정비 시점</strong>을 알려줄 것입니다. <strong>네이버</strong>, <strong>구글</strong>과 같은 빅테크 기업들이 개발하는 <strong>ChatGPT</strong>나 <strong>Gemini</strong>와 같은 <strong>AI</strong> 기술이 차량 진단에 활용될 <strong>예상</strong>입니다. <strong>EV6</strong> <strong>유지비</strong>를 줄이려면 이러한 기술을 적극적으로 활용하여 불필요한 정비를 줄여야 합니다. <strong>전문 업체</strong>의 <strong>추천</strong>을 받아 <strong>AI</strong> 기반 진단 서비스를 활용하면 <strong>비용</strong> 절감에 도움이 될 수 있습니다.</p>
+            
+            <h3>5. <strong>EV6</strong> <strong>신규 가입</strong>자를 위한 <strong>혜택</strong> 및 <strong>할인</strong> 정보 (2026년)</h3>
+            <p><strong>EV6</strong> <strong>신규 가입</strong>자를 위한 <strong>혜택</strong>은 딜러 <strong>프로모션</strong>과 정부 <strong>보조금</strong>으로 구성됩니다. <strong>신규 가입</strong> 시 <strong>사은품</strong>(충전기 설치 지원금, 차량 용품 등)이나 <strong>현금지원</strong> <strong>이벤트</strong>를 통해 초기 <strong>비용</strong> 부담을 줄일 수 있습니다. <strong>EV6</strong> <strong>구매</strong> <strong>혜택</strong>은 시기에 따라 달라지므로, **기아 공식 홈페이지**나 <strong>전문</strong> <strong>딜러</strong>를 통해 <strong>신규</strong> <strong>가입</strong> <strong>정보</strong>를 확인해야 합니다. <strong>유튜브</strong>나 <strong>네이버</strong> <strong>카페</strong> 등에서 <strong>EV6</strong> <strong>구매 후기</strong>를 참고하여 <strong>저렴한곳</strong>을 찾는 것도 좋은 방법입니다.</p>
+
+            <h3>6. <strong>EV6</strong> <strong>장단점</strong> 총 정리: <strong>내돈내산</strong> 오너의 관점</h3>
+            <p><strong>EV6</strong> <strong>내돈내산</strong> 오너들이 꼽는 가장 큰 <strong>장점</strong>은 <strong>뛰어난 주행 성능</strong>과 <strong>충전 속도</strong>, 그리고 <strong>낮은 유지비</strong>입니다. 특히 <strong>장거리 운행</strong>이 잦은 운전자에게 <strong>EV6</strong>는 <strong>유지 비용 절감</strong> 효과가 매우 큽니다. 반면 <strong>단점</strong>으로는 <strong>소음 방지 대책</strong>이 일부 부족하고, <strong>EV6 GT</strong> 모델의 경우 <strong>승차감</strong>이 다소 하드하다는 평가도 있습니다. <strong>EV6</strong> 구매를 고려한다면 <strong>전문 업체</strong>의 시승 <strong>추천</strong>을 통해 <strong>장단점</strong>을 직접 경험하는 것이 중요합니다.</p>
+
+            <h3>7. <strong>EV6</strong> <strong>순위</strong>와 <strong>비교</strong>: 2026년 전기차 시장에서의 위치</h3>
+            <p>2026년에도 <strong>EV6</strong>는 준중형 전기차 시장에서 상위 <strong>순위</strong>를 유지할 것으로 <strong>예상</strong>됩니다. <strong>EV6</strong>는 E-GMP 플랫폼의 완성도를 바탕으로 <strong>아이오닉 5</strong>와 <strong>테슬라 모델 3</strong> 사이에서 독자적인 영역을 구축하고 있습니다. <strong>EV6</strong>의 <strong>장점</strong>은 <strong>디자인</strong>과 <strong>주행 성능</strong>이며, <strong>단점</strong>은 <strong>테슬라</strong> 대비 <strong>주행 가능 거리</strong>가 짧다는 <strong>차이점</strong>이 있습니다. <strong>EV6</strong> <strong>유지비</strong>를 <strong>비교</strong>할 때 <strong>충전 비용</strong> 외에도 <strong>배터리 수명</strong>과 <strong>차량 감가상각</strong>을 고려해야 합니다.</p>
+            
+            <hr>
+            
+            <h3>공인된 신뢰성 외부 사이트 참고 자료</h3>
+            <div class="trust-links">
+                <p>성공적인 전기차 관리를 위해 공신력 있는 기관의 정보를 참고하세요:</p>
+                <ul>
+                    <li><a href="https://www.kiacorp.com/" target="_blank">기아 공식 홈페이지: EV6 모델 및 보증 정보</a></li>
+                    <li><a href="https://www.ev.or.kr/" target="_blank">환경부 무공해차 통합누리집: 전기차 보조금 및 충전소 정보</a></li>
+                    <li><a href="https://www.korea.kr/" target="_blank">대한민국 정책브리핑 (정부24): 전기차 세제 혜택 및 법규</a></li>
+                    <li><a href="https://www.koccon.net/" target="_blank">한국소비자원: 전기차 관련 소비자 피해 예방 정보</a></li>
+                    <li><a href="https://www.koreaenergy.or.kr/" target="_blank">한국에너지공단: 에너지 효율 및 전기차 관련 정보</a></li>
+                </ul>
+            </div>
+        </section>
+        
+        <section id="faq">
+            <h2>❓ 자주 묻는 질문 (FAQ) - EV6 유지비 편</h2>
+            <p><strong>기아 EV6 유지비</strong>와 관련하여 오너들이 가장 궁금해하시는 질문들을 모았습니다. 2026년 오너 라이프에 참고하세요.</p>
+            <dl>
+                <dt tabindex="0" aria-expanded="false">Q1. EV6 충전 비용은 월 <strong>평균</strong> <strong>얼마</strong> 정도 드나요?</dt>
+                <dd>A. 주행 환경에 따라 크게 달라집니다. <strong>집밥</strong>(아파트 완속 충전기)을 주로 사용하는 경우, 월 1,000km 주행 기준으로 <strong>평균</strong> 4~6만 원의 <strong>비용</strong>이 발생합니다. 공용 급속 충전을 주로 사용하는 경우 10~15만 원까지 <strong>예상</strong>해야 합니다. 이는 내연기관차 주유비(월 20~30만원) 대비 <strong>장점</strong>입니다.</dd>
+                
+                <dt tabindex="0" aria-expanded="false">Q2. EV6 <strong>보험료</strong>는 내연기관차와 <strong>차이점</strong>이 큰가요?</dt>
+                <dd>A. 네, <strong>EV6</strong>는 차량 가격이 높기 때문에 자차 보험료가 비싸다는 <strong>단점</strong>이 있습니다. <strong>신규 가입</strong>자는 <strong>내돈내산</strong> <strong>후기</strong>를 참고하여 <strong>다이렉트 보험</strong> <strong>비교</strong>를 통해 <strong>저렴한곳</strong>을 찾는 것이 좋습니다. 주행거리 <strong>할인 혜택</strong>이나 첨단 안전장치 <strong>할인</strong>을 꼼꼼히 챙겨야 합니다.</dd>
+                
+                <dt tabindex="0" aria-expanded="false">Q3. <strong>EV6</strong> <strong>타이어</strong> 교체 주기는 <strong>평균</strong> <strong>얼마</strong>인가요?</dt>
+                <dd>A. <strong>EV6</strong>는 일반 내연기관차보다 타이어 마모 속도가 빠릅니다. <strong>평균</strong>적으로 3~4만km 주행 후 교체가 필요하며, <strong>EV6 GT</strong> 모델은 더 빠를 수 있습니다. 타이어 <strong>가격</strong>은 <strong>전문 업체</strong>에서 <strong>견적</strong>을 받아보는 것이 좋습니다.</dd>
+                
+                <dt tabindex="0" aria-expanded="false">Q4. <strong>EV6</strong> <strong>장점</strong>은 <strong>유지비</strong>인가요, <strong>주행 성능</strong>인가요?</dt>
+                <dd>A. <strong>EV6</strong>의 가장 큰 <strong>장점</strong>은 <strong>주행 성능</strong>과 <strong>충전 속도</strong>입니다. <strong>유지비</strong> 또한 <strong>장점</strong>이지만, 초기 구매 <strong>가격</strong> 부담이라는 <strong>단점</strong>을 상쇄할 정도로 <strong>충전 비용</strong> 절감이 큰 비중을 차지합니다. <strong>내돈내산</strong> 오너들은 <strong>유지비</strong> 만족도가 높습니다.</dd>
+                
+                <dt tabindex="0" aria-expanded="false">Q5. 2026년 <strong>EV6</strong> <strong>보조금</strong> <strong>혜택</strong>이 축소될 <strong>예상</strong>인데 <strong>가격</strong>에 미치는 영향은?</dt>
+                <dd>A. 2026년에는 정부 <strong>보조금</strong>이 축소될 <strong>예상</strong>이므로, <strong>EV6</strong> <strong>구매 가격</strong>의 실질적인 <strong>금액</strong>이 상승할 수 있습니다. <strong>신규 가입</strong> 시 <strong>할인</strong> 프로모션이나 <strong>딜러 사은품</strong> 등을 적극적으로 활용하여 초기 <strong>비용</strong>을 줄이는 것이 중요합니다.</dd>
+            </dl>
+        </section>
+
+        <section id="check-list-download">
+            <h2>🎁 EV6 유지비 절감 체크리스트 다운로드</h2>
+            <p><strong>EV6</strong> 구매 후 놓치기 쉬운 50가지 <strong>유지비</strong> 절감 항목을 담은 체크리스트를 무료로 다운로드하세요. 성공적인 전기차 라이프를 위한 완벽한 가이드입니다.</p>
+            <form action="download-checklist.php" method="POST" aria-label="체크리스트 다운로드 폼">
+                <div class="form-group">
+                    <label for="download_email">이메일 주소</label>
+                    <input type="email" id="download_email" name="download_email" placeholder="체크리스트를 받을 이메일을 입력하세요" required>
+                </div>
+                <button type="submit" class="submit-button">체크리스트 받기 (무료)</button>
+            </form>
+        </section>
+        
+        <a href="#estimation-form" class="cta-button" aria-label="최종 EV6 유지비 견적 요청">나의 EV6 예상 유지비 견적 요청하기</a>
+
     </main>
-  </body>
-</html>
+
+    <script>
+        // FAQ 아코디언 기능 (접기/펼치기)
+        document.querySelectorAll('dl dt').forEach((dt) => {
+            dt.addEventListener('click', () => {
+                const isActive = dt.classList.toggle('active');
+                dt.setAttribute('aria-expanded', isActive);
+                // Close other opened items for better UX
+                document.querySelectorAll('dl dt').forEach(otherDt => {
+                    if (otherDt !== dt && otherDt.classList.contains('active')) {
+                        otherDt.classList.remove('active');
+                        otherDt.setAttribute('aria-expanded', false);
+                    }
+                });
+            });
+            dt.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    dt.click();
+                }
+            });
+        });
+    </script>
+  
